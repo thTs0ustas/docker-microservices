@@ -1,0 +1,24 @@
+{
+  "private": true,
+  "version": "1.0.0",
+  "workspaces": {
+    "packages": [
+      "client",
+      "posts",
+      "eslint-config-myConfig",
+      "comments",
+      "event-bus",
+      "moderation",
+      "query"
+    ]
+  },
+  "scripts": {
+    "query": "yarn workspace @microservices/query",
+    "moderation": "yarn workspace @microservices/moderation",
+    "event-bus": "yarn workspace @microservices/event-bus",
+    "comments": "yarn workspace @microservices/comments",
+    "client": "yarn workspace @microservices/client",
+    "posts": "yarn workspace @microservices/posts"
+  },
+  "dependencies": {}
+}
