@@ -42,11 +42,11 @@
   line-height: 1.3125;
   background-color: #0059b2;
   color: #fff;
-  box-shadow: 5px 5px 10px #777;
+  box-shadow: 3px 3px 10px #777;
 }
 .button:focus {
   transform: translate(0.4px, 0.4px);
-  box-shadow: 3px 3px 8px #777;
+  box-shadow: 2px 2px 8px #777;
 }
 .button:hover {
   filter: brightness(120%);

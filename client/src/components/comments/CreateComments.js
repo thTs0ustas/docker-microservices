@@ -3,6 +3,7 @@ import { useCreateComments } from "./useCreateComments";
 
 export function CommentPost({ post }) {
   const { comment, setComment, handleCommentSubmit } = useCreateComments(post);
+
   return (
     <div className={styles.container}>
       <form>
@@ -18,7 +19,7 @@ export function CommentPost({ post }) {
           className={styles.button}
           onClick={handleCommentSubmit}
         >
-          Add Comment
+          Add
         </button>
       </form>
     </div>
