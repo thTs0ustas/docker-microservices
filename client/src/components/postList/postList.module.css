@@ -1,3 +1,7 @@
+.outerContainer {
+  width: 70%;
+  padding: 40px 20px;
+}
 .container {
   padding: 40px 0;
   display: flex;
