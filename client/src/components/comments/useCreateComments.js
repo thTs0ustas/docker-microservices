@@ -1,14 +1,26 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
+import { useProvider } from "../../context/Provider";
 
 export const useCreateComments = (post) => {
   const [comment, setComment] = useState("");
+  const [error, setError] = useState("");
+  const [, dispatch] = useProvider();
+
+  useEffect(() => {
+    if (error) setTimeout(() => setError(""), 2000);
+  }, [error]);
 
   const handleCommentSubmit = (e) => {
     e.preventDefault();
-    axios.post(`http://localhost:4001/posts/${post.id}/comments`, {
-      content: comment,
-    });
+    if (!comment) setError("Comment cant be empty");
+    else
+      axios
+        .post(`http://localhost:4001/posts/${post.id}/comments`, {
+          content: comment,
+        })
+        .then(() => dispatch((prev) => ({ ...prev, refresh: true })))
+        .catch(setError);
   };
-  return { comment, setComment, handleCommentSubmit };
+  return { comment, setComment, error, handleCommentSubmit };
 };

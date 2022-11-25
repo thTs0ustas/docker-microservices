@@ -37,8 +37,6 @@ app.post("/posts", async (req, res) => {
 });
 
 app.get("/events", (req, res) => {
-  // const { id } = req.body;
-  // const postToServe = posts[id];
   res.status(200).send(posts);
 });
 app.post("/events", (req, res) => {

@@ -1,8 +1,8 @@
 export function CommentList({ comments }) {
   return (
     <ul>
-      {comments.map((comment) => (
-        <li key={comment.commentId}>{comment.content}</li>
+      {comments?.map((comment) => (
+        <li key={comment.id}>{comment.content}</li>
       ))}
     </ul>
   );

@@ -1,14 +1,17 @@
 import { useState } from "react";
-import { CreatePosts, PostsList } from "./components";
 import styles from "./app.module.css";
+import { CreatePosts, PostsList } from "./layouts";
+import Provider from "./context/Provider";
 
 function App() {
   const [posts, setPosts] = useState([]);
   return (
-    <div className={styles.container}>
-      <CreatePosts setPosts={setPosts} />
-      <PostsList posts={posts} />
-    </div>
+    <Provider>
+      <div className={styles.container}>
+        <CreatePosts setPosts={setPosts} />
+        <PostsList posts={posts} />
+      </div>
+    </Provider>
   );
 }
 

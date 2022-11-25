@@ -1,8 +1,8 @@
 import { useCreatePosts } from "./useCreatePosts";
 import styles from "./createPosts.module.css";
 
-export function CreatePosts({ setPosts }) {
-  const { handleChange, handleSubmit, error, post } = useCreatePosts(setPosts);
+export function CreatePosts() {
+  const { handleChange, handleSubmit, error, post } = useCreatePosts();
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Create Post</h1>
