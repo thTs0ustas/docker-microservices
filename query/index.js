@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+
 const app = express();
 
 app.use(bodyParser.json());
@@ -13,26 +14,43 @@ app.get("/posts", (req, res) => {
 });
 
 app.post("/events", (req, res) => {
+  console.log("Events received", req.body.type);
   const { type, data } = req.body;
   switch (type) {
-    case "postCreated":
-      posts[data.id] = {
-        id: data.id,
-        title: data.title,
+    case "postCreated": {
+      const { id, title } = data;
+      posts[id] = {
+        id,
+        title,
         comments: [],
       };
-      return res.status(201);
-    case "commentCreated":
-      posts[data.postId].comments.push({
-        id: data.id,
-        content: data.content,
+      res.status(201);
+      break;
+    }
+    case "commentCreated": {
+      const { id, postId, content, status } = data;
+      posts[postId].comments.push({
+        id,
+        content,
+        status,
       });
-      return res.status(201);
+      res.status(201);
+      break;
+    }
+    case "commentUpdated": {
+      const { id, postId, status } = data;
+      console.log(posts[postId]);
+      const findComment = posts[postId]?.comments.find(
+        ({ commentId }) => commentId === id
+      );
+      findComment.status = status;
+      res.status(201);
+      break;
+    }
     default:
-      return res.send({ status: "error" });
+      res.send({ status: "error" });
   }
 });
-
 app.listen(4002, () => {
   console.log("Listening to port 4002");
 });

@@ -19,7 +19,7 @@ export const useCreatePosts = () => {
         dispatch((prev) => ({ ...prev, data: { ...prev.data, data } }));
       })
       .then(() => dispatch((prev) => ({ ...prev, refresh: false })))
-      .catch(setError);
+      .catch((err) => setError(err.message));
   }, [state.refresh]);
 
   const handleChange = (event) => {
@@ -35,7 +35,7 @@ export const useCreatePosts = () => {
         .post("http://localhost:4000/posts", { title: post })
         .then(() => setPost(""))
         .then(() => dispatch((prev) => ({ ...prev, refresh: true })))
-        .catch(setError);
+        .catch((err) => setError(err.message));
   };
   return { handleChange, handleSubmit, post, error, setError };
 };
