@@ -1,0 +1,3 @@
+{
+  "extends": ["@microservices/eslint-config"]
+}

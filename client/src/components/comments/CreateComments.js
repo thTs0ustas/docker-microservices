@@ -7,12 +7,13 @@ export function CommentPost({ post }) {
 
   return (
     <div className={styles.container}>
-      <form>
+      <form className={styles.inputContainer}>
+        <span className={styles.error}>{error}</span>
         <input
           className={styles.input}
           type="text"
           name="comment"
-          value={error || comment}
+          value={comment}
           onChange={(e) => setComment(e.target.value)}
         />
         <button

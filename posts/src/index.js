@@ -22,6 +22,7 @@ app.post("/posts", async (req, res) => {
   posts[id] = {
     id,
     title,
+    comments: [],
   };
   await axios
     .post("http://localhost:4005/events", {
@@ -29,6 +30,7 @@ app.post("/posts", async (req, res) => {
       data: {
         id,
         title,
+        comments: [],
       },
     })
     .catch(console.log);

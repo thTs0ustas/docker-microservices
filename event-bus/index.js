@@ -10,6 +10,7 @@ app.use(cors());
 
 app.post("/events", (req, res) => {
   const event = req.body;
+  console.log(event);
   axios.post(`${baseUrl}4000/events`, event).catch((err) => {
     console.log(err);
   });
@@ -19,10 +20,11 @@ app.post("/events", (req, res) => {
   axios.post(`${baseUrl}4002/events`, event).catch((err) => {
     console.log(err);
   });
-
+  axios.post(`${baseUrl}4003/events`, event).catch((err) => {
+    console.log(err);
+  });
   res.send({ status: "ok" });
 });
-
 app.listen(4005, () => {
   console.log("Listening to port 4005");
 });

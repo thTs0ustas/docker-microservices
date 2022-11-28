@@ -5,16 +5,13 @@
 
 .inputContainer {
   position: relative;
-  width: 100%;
-  border-bottom: 0 solid #0059b2;
+
 }
-.inputContainer:focus-within {
-  transition: linear 200ms;
-}
+
 .error {
   position: absolute;
   color: red;
-  left: 5px;
+  top: -25px
 }
 .label {
   margin-top: 20px;
