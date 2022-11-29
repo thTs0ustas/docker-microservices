@@ -1,30 +1,25 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const { default: axios } = require("axios");
 
 const app = express();
-
+const baseUrl = "http://localhost:";
 app.use(bodyParser.json());
 app.use(cors());
 
 const posts = {};
 
-app.get("/posts", (req, res) => {
-  res.status(200).send(posts);
-});
-
-app.post("/events", (req, res) => {
-  console.log("Events received", req.body.type);
-  const { type, data } = req.body;
+function processEvents(type, data) {
   switch (type) {
     case "postCreated": {
       const { id, title } = data;
+      // eslint-disable-next-line no-param-reassign
       posts[id] = {
         id,
         title,
         comments: [],
       };
-      res.status(201);
       break;
     }
     case "commentCreated": {
@@ -34,23 +29,39 @@ app.post("/events", (req, res) => {
         content,
         status,
       });
-      res.status(201);
       break;
     }
     case "commentUpdated": {
-      const { id, postId, status } = data;
-      console.log(posts[postId]);
-      const findComment = posts[postId]?.comments.find(
-        ({ commentId }) => commentId === id
+      const { id, status, postId } = data;
+      const findComment = posts[postId].comments.find(
+        ({ id: commentId }) => commentId === id
       );
       findComment.status = status;
-      res.status(201);
       break;
     }
     default:
-      res.send({ status: "error" });
+      break;
   }
+}
+
+app.get("/posts", (req, res) => {
+  res.status(200).send(posts);
 });
-app.listen(4002, () => {
+
+app.post("/events", (req, res) => {
+  const { type, data } = req.body;
+
+  processEvents(type, data);
+
+  res.status(201).send({ status: "ok" });
+});
+app.listen(4002, async () => {
   console.log("Listening to port 4002");
+
+  const { data } = await axios.get(`${baseUrl}4005/events`).catch(console.log);
+  data.forEach(({ type, data: eventData }) => {
+    processEvents(type, eventData);
+  });
 });
+
+module.exports = posts;

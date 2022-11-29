@@ -11,12 +11,12 @@ export const useCreateComments = (post) => {
     if (error) setTimeout(() => setError(""), 2000);
   }, [error]);
 
-  const handleFiltering = (text) => /orange/gi.test(text);
+  // const handleFiltering = (text) => /orange/gi.test(text);
 
   const handleCommentSubmit = (e) => {
     e.preventDefault();
     if (!comment) setError("Comment cant be empty");
-    else if (handleFiltering(comment)) setError("Orange is not allowed");
+    // else if (handleFiltering(comment)) setError("Orange is not allowed");
     else
       axios
         .post(`http://localhost:4001/posts/${post.id}/comments`, {
@@ -25,5 +25,5 @@ export const useCreateComments = (post) => {
         .then(() => dispatch((prev) => ({ ...prev, refresh: true })))
         .catch(setError);
   };
-  return { comment, setComment, error, handleCommentSubmit, handleFiltering };
+  return { comment, setComment, error, handleCommentSubmit };
 };

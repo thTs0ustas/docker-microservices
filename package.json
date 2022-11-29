@@ -18,7 +18,8 @@
     "event-bus": "yarn workspace @microservices/event-bus",
     "comments": "yarn workspace @microservices/comments",
     "client": "yarn workspace @microservices/client",
-    "posts": "yarn workspace @microservices/posts"
+    "posts": "yarn workspace @microservices/posts",
+    "dev": "yarn query start & yarn moderation start & yarn event-bus start & yarn comments start & yarn client start & yarn posts start"
   },
   "dependencies": {}
 }

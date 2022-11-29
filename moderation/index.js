@@ -9,30 +9,20 @@ app.use(bodyParser.json());
 app.use(cors());
 const hasOrange = (text) => /orange/gi.test(text);
 
-app.post("/events", (req, res) => {
+app.post("/events", async (req, res) => {
   console.log("Events received", req.body.type);
 
-  const {
-    type,
-    data: { id, postId, content },
-  } = req.body;
+  const { type, data } = req.body;
+
   if (type === "commentCreated") {
-    const testIfOrange = hasOrange(content);
-    let response;
+    const { id, postId, content } = data;
+    const status = hasOrange(content) ? "rejected" : "fulfilled";
+    const response = {
+      type: "commentModerated",
+      data: { id, postId, content, status },
+    };
 
-    if (!testIfOrange) {
-      response = {
-        type: "commentUpdated",
-        data: { id, postId, content, status: "fulfilled" },
-      };
-    } else {
-      response = {
-        type: "commentUpdated",
-        data: { id, postId, content, status: "rejected" },
-      };
-    }
-
-    axios.post(`${baseUrl}4001/update`, response).catch((err) => {
+    await axios.post(`${baseUrl}4005/events`, response).catch((err) => {
       console.log(err);
     });
   }

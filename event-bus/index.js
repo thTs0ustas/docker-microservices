@@ -8,9 +8,13 @@ const baseUrl = "http://localhost:";
 app.use(bodyParser.json());
 app.use(cors());
 
+const events = [];
+
 app.post("/events", (req, res) => {
   const event = req.body;
-  console.log(event);
+
+  events.push(event);
+
   axios.post(`${baseUrl}4000/events`, event).catch((err) => {
     console.log(err);
   });
@@ -25,6 +29,11 @@ app.post("/events", (req, res) => {
   });
   res.send({ status: "ok" });
 });
+
+app.get("/events", (req, res) => {
+  res.status(200).send(events);
+});
+
 app.listen(4005, () => {
   console.log("Listening to port 4005");
 });
