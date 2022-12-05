@@ -4,7 +4,6 @@ const axios = require("axios");
 const cors = require("cors");
 
 const app = express();
-const baseUrl = "http://localhost:";
 app.use(bodyParser.json());
 app.use(cors());
 const hasOrange = (text) => /orange/gi.test(text);
@@ -22,7 +21,7 @@ app.post("/events", async (req, res) => {
       data: { id, postId, content, status },
     };
 
-    await axios.post(`${baseUrl}4005/events`, response).catch((err) => {
+    await axios.post(`http//event-bus:4005/events`, response).catch((err) => {
       console.log(err);
     });
   }

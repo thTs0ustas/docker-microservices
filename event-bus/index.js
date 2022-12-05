@@ -4,7 +4,7 @@ const cors = require("cors");
 const axios = require("axios");
 
 const app = express();
-const baseUrl = "http://localhost:";
+// const baseUrl = "http://localhost:";
 app.use(bodyParser.json());
 app.use(cors());
 
@@ -15,16 +15,16 @@ app.post("/events", (req, res) => {
 
   events.push(event);
 
-  axios.post(`${baseUrl}4000/events`, event).catch((err) => {
+  axios.post(`http://posts-clusterid:4000/events`, event).catch((err) => {
     console.log(err);
   });
-  axios.post(`${baseUrl}4001/events`, event).catch((err) => {
+  axios.post(`http://comments-clusterid:4001/events`, event).catch((err) => {
     console.log(err);
   });
-  axios.post(`${baseUrl}4002/events`, event).catch((err) => {
+  axios.post(`http://query-clusterid:4002/events`, event).catch((err) => {
     console.log(err);
   });
-  axios.post(`${baseUrl}4003/events`, event).catch((err) => {
+  axios.post(`http://moderation-clusterid:4003/events`, event).catch((err) => {
     console.log(err);
   });
   res.send({ status: "ok" });
