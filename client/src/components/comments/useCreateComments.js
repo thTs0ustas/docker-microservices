@@ -19,7 +19,7 @@ export const useCreateComments = (post) => {
     // else if (handleFiltering(comment)) setError("Orange is not allowed");
     else
       axios
-        .post(`http://localhost:4001/posts/${post.id}/comments`, {
+        .post(`http://posts.com/posts/${post.id}/comments`, {
           content: comment,
         })
         .then(() => dispatch((prev) => ({ ...prev, refresh: true })))

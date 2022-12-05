@@ -16,16 +16,16 @@ app.post("/events", (req, res) => {
   events.push(event);
 
   axios.post(`http://posts-clusterid:4000/events`, event).catch((err) => {
-    console.log(err);
+    console.log(err.message);
   });
   axios.post(`http://comments-clusterid:4001/events`, event).catch((err) => {
-    console.log(err);
+    console.log(err.message);
   });
   axios.post(`http://query-clusterid:4002/events`, event).catch((err) => {
-    console.log(err);
+    console.log(err.message);
   });
   axios.post(`http://moderation-clusterid:4003/events`, event).catch((err) => {
-    console.log(err);
+    console.log(err.message);
   });
   res.send({ status: "ok" });
 });

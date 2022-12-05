@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
         - name: moderation
-          image: blog/moderation
+          image: blog/moderation:latest
           imagePullPolicy: Never
           resources:
             limits:

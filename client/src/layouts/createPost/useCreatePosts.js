@@ -14,7 +14,7 @@ export const useCreatePosts = () => {
   useEffect(() => {
     if (error || !state.refresh) return;
     axios
-      .get("http://localhost:4002/posts")
+      .get("http://posts.com/posts")
       .then(({ data }) => {
         dispatch((prev) => ({ ...prev, data: { ...prev.data, data } }));
       })
@@ -32,7 +32,7 @@ export const useCreatePosts = () => {
     if (!post) setError("Have to set a title.");
     else
       axios
-        .post("http://localhost:4000/posts", { title: post })
+        .post("http://posts.com/posts/create", { title: post })
         .then(() => setPost(""))
         .then(() => dispatch((prev) => ({ ...prev, refresh: true })))
         .catch((err) => setError(err.message));

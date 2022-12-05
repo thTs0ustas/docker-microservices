@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: comments
+  name: client
 spec:
   selector:
     matchLabels:
-      app: comments
+      app: client
   template:
     metadata:
       labels:
-        app: comments
+        app: client
     spec:
       containers:
-        - name: comments
-          image: blog/comments:latest
+        - name: client
+          image: blog/client:latest
           imagePullPolicy: Never
           resources:
             limits:
@@ -23,12 +23,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: comments-clusterip
+  name: client-clusterip
 spec:
   selector:
-    app: comments
+    app: client
   ports:
-    - name: comments
+    - name: client
       protocol: TCP
-      port: 4001
-      targetPort: 4001
+      port: 3000
+      targetPort: 3000
