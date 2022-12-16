@@ -5,7 +5,7 @@ const Posts = createContext({});
 function Provider({ children }) {
   const [state, dispatch] = useState({ refresh: true, data: {} });
 
-  const value = useMemo(() => ({ state, dispatch }), [state]);
+  const value = useMemo(() => ({ state, dispatch }));
 
   return <Posts.Provider value={value}>{children}</Posts.Provider>;
 }

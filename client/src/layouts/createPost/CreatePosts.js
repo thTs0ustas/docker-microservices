@@ -8,21 +8,20 @@ export function CreatePosts() {
       <h1 className={styles.title}>Create Post</h1>
       <form noValidate>
         <div>
-          {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
           <label className={styles.label} htmlFor="post">
             Title
+            <div className={styles.inputContainer}>
+              <input
+                className={styles.input}
+                type="text"
+                name="post"
+                id="post"
+                value={post}
+                onChange={handleChange}
+              />
+              {error && <p className={styles.error}>{error}</p>}
+            </div>
           </label>
-          <div className={styles.inputContainer}>
-            <input
-              className={styles.input}
-              type="text"
-              name="post"
-              id="post"
-              value={post}
-              onChange={handleChange}
-            />
-            {error && <p className={styles.error}>{error}</p>}
-          </div>
         </div>
         <div>
           <button

@@ -13,12 +13,12 @@ spec:
     spec:
       containers:
         - name: client
-          image: blog/client:latest
+          image: blog/client
           imagePullPolicy: Never
           resources:
             limits:
-              memory: "128Mi"
-              cpu: "500m"
+              memory: "512Mi"
+              cpu: "1000m"
 ---
 apiVersion: v1
 kind: Service

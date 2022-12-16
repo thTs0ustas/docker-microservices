@@ -20,6 +20,5 @@
     "client": "yarn workspace @microservices/client",
     "posts": "yarn workspace @microservices/posts",
     "dev": "yarn query start & yarn moderation start & yarn event-bus start & yarn comments start & yarn client start & yarn posts start"
-  },
-  "dependencies": {}
+  }
 }
