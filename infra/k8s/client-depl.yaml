@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
         - name: client
-          image: blog/client
+          image: blog/client:latest
           imagePullPolicy: Never
           resources:
             limits:

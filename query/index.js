@@ -44,7 +44,7 @@ function processEvents(type, data) {
 }
 
 app.get("/posts", (req, res) => {
-  res.status(200).send(posts);
+  res.status(200).send(posts || {});
 });
 
 app.post("/events", (req, res) => {
@@ -57,7 +57,7 @@ app.post("/events", (req, res) => {
 app.listen(4002, async () => {
   console.log("Listening to port 4002");
 
-  const { data } = await axios
+  const { data = {} } = await axios
     .get(`http://event-bus:4005/events`)
     .catch(console.log);
   data.forEach(({ type, data: eventData }) => {
